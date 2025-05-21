@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .todo-container {
+            margin-top: 50px;
+        }
+        .todo-list {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container todo-container">
+    <h2 class="text-center">To-Do List</h2>
+    <div class="input-group mb-3">
+        <input type="text" id="taskInput" class="form-control" placeholder="Add a new task" aria-label="Task" aria-describedby="button-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" id="addButton">Add</button>
+        </div>
+    </div>
+    <ul class="list-group todo-list" id="todoList"></ul>
+</div>
+
+<script>
+    document.getElementById('addButton').onclick = function() {
+        const taskInput = document.getElementById('taskInput');
+        const taskValue = taskInput.value.trim();
+
+        if (taskValue) {
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+            listItem.textContent = taskValue;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'btn btn-danger btn-sm';
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function() {
+                listItem.remove();
+            };
+
+            listItem.appendChild(deleteButton);
+            document.getElementById('todoList').appendChild(listItem);
+            taskInput.value = '';
+        }
+    };
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
